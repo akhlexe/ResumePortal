@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -39,16 +39,16 @@
         
             <!-- Microformats! -->
         
-            <h1 class="fn">C'thulhu</h1>
+            <h1 class="fn"><span th:text="${userProfile.firstName}"></span><span th:text="${userProfile.lastName}">C'thulhu</span></h1>
         
             <p>
-                Cell: <span class="tel">555-666-7777</span><br />
-                Email: <a class="email" href="mailto:greatoldone@lovecraft.com">greatoldone@lovecraft.com</a>
+                Cell: <span class="tel" th:text="${userProfile.phone}">555-666-7777</span><br />
+                Email: <a class="email" th:text="${userProfile.email}">greatoldone@lovecraft.com</a>
             </p>
         </div>
                 
         <div id="objective">
-            <p>
+            <p th:text="${userProfile.summary}">
                 I am an outgoing and energetic (ask anybody) young professional, seeking a 
                 career that fits my professional skills, personality, and murderous tendencies. 
                 My squid-like head is a masterful problem solver and inspires fear in who gaze upon it. 
