@@ -77,6 +77,8 @@
                 <td><input type="checkbox" name="currentJob" th:field="*{jobs[__${stat.index}__].currentJob}"></td>
             </tr>
         </table>
+        <a th:href="@{/edit(add=job)}">Add Job</a>
+
         <br/>
         <h3>Education</h3>
         <table class="table">
@@ -98,6 +100,7 @@
             </tr>
 
         </table>
+        <a th:href="@{/edit(add=education)}">Add Education</a>
         <br/>
         <h3>Skills</h3>
         <table class="table" style="width: 40%;">
@@ -105,6 +108,7 @@
                 <td><input class="form-control" th:field="*{skills[__${stat.index}__]}"></td>
             </tr>
         </table>
+        <a th:href="@{/edit(add=skill)}">Add Skill</a>
 
         <input type="submit" value="Save">
 
