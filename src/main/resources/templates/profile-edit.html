@@ -40,7 +40,79 @@
             <input class="form-control" th:field="*{designation}">
         </div>
 
+        <h2>Experience</h2>
+        <table class="table">
+
+            <thead>
+            <tr>
+                <th scope="col">Company</th>
+                <th scope="col">Designation</th>
+                <th scope="col">Start date</th>
+                <th scope="col">End date</th>
+                <th scope="col">Current Job?</th>
+            </tr>
+            </thead>
+
+            <tr th:each="job : *{jobs}">
+                <td><input class="form-control" th:value="${job.company}"></td>
+                <td><input class="form-control" th:value="${job.designation}"></td>
+                <td><input type="date" class="form-control" th:value="${job.startDate}"></td>
+                <td><input type="date"class="form-control" th:value="${job.endDate}"></td>
+                <td><input type="radio" name="currentJob" th:value="${job.currentJob}"></td>
+            </tr>
+        </table>
+        <br/>
+        <h3>Education</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">College</th>
+                <th scope="col">Qualification</th>
+                <th scope="col">Start date</th>
+                <th scope="col">End date</th>
+                <th scope="col">Summary</th>
+            </tr>
+            </thead>
+            <tr th:each="educ : *{educations}">
+                <td><input class="form-control" th:value="${educ.college}"></td>
+                <td><input class="form-control" th:value="${educ.qualification}"></td>
+                <td><input type="date" class="form-control" th:value="${educ.startDate}"></td>
+                <td><input type="date"class="form-control" th:value="${educ.endDate}"></td>
+                <td><input class="form-control" th:value="${educ.summary}"></td>
+            </tr>
+
+        </table>
+        <br/>
+        <h3>Skills</h3>
+        <table class="table" style="width: 40%;">
+            <tr th:each="skill : *{skills}">
+                <td><input class="form-control" th:value="${skill}"></td>
+            </tr>
+        </table>
+
+        <input type="submit" value="Save">
+
     </form>
 </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
