@@ -2,12 +2,14 @@ package io.javabrains.resumeportal;
 
 import io.javabrains.resumeportal.models.Education;
 import io.javabrains.resumeportal.models.Job;
+import io.javabrains.resumeportal.models.User;
 import io.javabrains.resumeportal.models.UserProfile;
 import io.javabrains.resumeportal.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -103,10 +105,20 @@ public class HomeController {
     }
 
     @PostMapping("/edit")
-    public String postEdit(Principal principal){
-        // TODO save the updated values in the form and redirect.
-        String userId = principal.getName();
-        return "redirect:/view/"+userId;
+    public String postEdit(Principal principal, @ModelAttribute UserProfile userProfile){
+
+        String userName = principal.getName();
+
+        Optional<UserProfile> optionalUserProfile = userProfileRepository.findByUserName(userName);
+        optionalUserProfile.orElseThrow(() -> new RuntimeException("Profile not found"));
+        UserProfile savedUserProfile = optionalUserProfile.get();
+
+        userProfile.setId(savedUserProfile.getId());
+        userProfile.setUserName(userName);
+
+        userProfileRepository.save(userProfile);
+
+        return "redirect:/view/"+userName;
     }
 
     @GetMapping("/view/{userId}")
