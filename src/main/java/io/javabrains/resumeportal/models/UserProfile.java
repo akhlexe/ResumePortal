@@ -24,6 +24,30 @@ public class UserProfile {
     @JoinColumn(name = "job_id") // Me hace ruido esta join column...
     private List<Job> jobs = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL,
+    orphanRemoval = true)
+    @JoinColumn(name = "education_id")
+    private List<Education> educations = new ArrayList<>();
+
+    @ElementCollection(targetClass = String.class)
+    private List<String> skills = new ArrayList<>();
+
+    public List<String> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<String> skills) {
+        this.skills = skills;
+    }
+
+    public List<Education> getEducations() {
+        return educations;
+    }
+
+    public void setEducations(List<Education> educations) {
+        this.educations = educations;
+    }
+
     public List<Job> getJobs() {
         return jobs;
     }

@@ -1,5 +1,5 @@
 insert into USER (id,user_name, password, active, roles) values
-(1,'foo','foo', 'true', 'USER'),
+(1,'einstein','einstein', 'true', 'USER'),
 (2,'bar','bar', 'true', 'USER');
 
 insert into USER_PROFILE (id,user_name, theme, summary, first_name, last_name, email,phone,designation) values

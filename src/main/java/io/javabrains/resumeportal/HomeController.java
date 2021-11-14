@@ -1,7 +1,7 @@
 package io.javabrains.resumeportal;
 
+import io.javabrains.resumeportal.models.Education;
 import io.javabrains.resumeportal.models.Job;
-import io.javabrains.resumeportal.models.User;
 import io.javabrains.resumeportal.models.UserProfile;
 import io.javabrains.resumeportal.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -36,6 +35,10 @@ public class HomeController {
         job1.setStartDate(LocalDate.of(2020,2,1));
         //job1.setEndDate(LocalDate.of(2020,3,1));
         job1.setCurrentJob(true);
+        job1.getResponsibilities().add("Come up with the theory of relativiy");
+        job1.getResponsibilities().add("Advanced quantic mechanics");
+        job1.getResponsibilities().add("Blow people's minds");
+
 
         Job job2 = new Job();
         job2.setCompany("Company 2");
@@ -45,9 +48,38 @@ public class HomeController {
         job2.setEndDate(LocalDate.of(2020,1,1));
         job2.setCurrentJob(false);
 
+
+        job2.getResponsibilities().add("Come up with the theory of relativiy");
+        job2.getResponsibilities().add("Advanced quantic mechanics");
+        job2.getResponsibilities().add("Blow people's minds");
+
         profile1.getJobs().clear();
         profile1.getJobs().add(job1);
         profile1.getJobs().add(job2);
+
+        Education education1 = new Education();
+        education1.setCollege("Koushik college!");
+        education1.setQualification("Incredible degree");
+        education1.setStartDate(LocalDate.of(2019,5,1));
+        education1.setEndDate(LocalDate.of(2020,1,1));
+        education1.setSummary("This guy teach like a god! goat");
+
+        Education education2 = new Education();
+        education2.setCollege("Barman 's college!");
+        education2.setQualification("Awesome degree");
+        education2.setStartDate(LocalDate.of(2020,2,1));
+        education2.setEndDate(LocalDate.of(2020,10,1));
+        education2.setSummary("Shaking the magic!");
+
+        profile1.getEducations().add(education1);
+        profile1.getEducations().add(education2);
+
+        profile1.getSkills().clear();
+        profile1.getSkills().add("Quantum physics");
+        profile1.getSkills().add("Not so good with apples like Isaac");
+        profile1.getSkills().add("Cool haircut!");
+        profile1.getSkills().add("Smart boy");
+        profile1.getSkills().add("People say i'm good with maths");
 
         userProfileRepository.save(profile1);
 
@@ -57,8 +89,24 @@ public class HomeController {
     }
 
     @GetMapping("/edit")
-    public String edit() {
-        return "edit page";
+    public String edit(Principal principal, Model model) {
+
+        String userId = principal.getName();
+
+        Optional<UserProfile> userProfileOptional = userProfileRepository.findByUserName(userId);
+        userProfileOptional.orElseThrow(()-> new RuntimeException("Not found: "+userId));
+
+        model.addAttribute("userprofile",userProfileOptional.get());
+        model.addAttribute("userId", userId);
+
+        return "profile-edit";
+    }
+
+    @PostMapping("/edit")
+    public String postEdit(Principal principal){
+        // TODO save the updated values in the form and redirect.
+        String userId = principal.getName();
+        return "redirect:/view/"+userId;
     }
 
     @GetMapping("/view/{userId}")
@@ -68,6 +116,7 @@ public class HomeController {
         userProfileOptional.orElseThrow(()-> new RuntimeException("Not found: "+userId));
 
         model.addAttribute("userId",userId);
+
         UserProfile userProfile = userProfileOptional.get();
         model.addAttribute("userProfile",userProfile);
 
@@ -75,3 +124,32 @@ public class HomeController {
         return "profile-templates/"+userProfile.getTheme()+"/index";
    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
