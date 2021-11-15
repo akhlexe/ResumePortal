@@ -1,6 +1,7 @@
 insert into USER (id,user_name, password, active, roles) values
 (1,'einstein','einstein', 'true', 'USER'),
-(2,'bar','bar', 'true', 'USER');
+(2,'bar','bar', 'true', 'USER'),
+(3,'exe','exe', 'true', 'USER');
 
 insert into USER_PROFILE (id,user_name, theme, summary, first_name, last_name, email,phone,designation) values
 (1,'einstein','1', 'Widely acknowledged to be one of the greatest physicists of all time. Im best known for developing the theory of relativity, but I also made important contributions to the development of the theory of quantum mechanics.','Albert ','Einstein','einstein@gmail.com','111-111-1111','Físico teórico'),
