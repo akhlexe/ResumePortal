@@ -75,10 +75,11 @@
                 <td><input type="date" class="form-control" th:field="*{jobs[__${stat.index}__].startDate}"></td>
                 <td><input type="date"class="form-control" th:field="*{jobs[__${stat.index}__].endDate}"></td>
                 <td><input type="checkbox" name="currentJob" th:field="*{jobs[__${stat.index}__].currentJob}"></td>
+                <td><a class="btn btn-danger" th:href="@{/delete(type=job,index=${stat.index})}" th:text="Delete"></a></td>
             </tr>
         </table>
-        <a th:href="@{/edit(add=job)}">Add Job</a>
-
+        <a class="btn btn-primary" th:href="@{/edit(add=job)}">Add Job</a>
+        <br/>
         <br/>
         <h3>Education</h3>
         <table class="table">
@@ -97,21 +98,28 @@
                 <td><input type="date" class="form-control" th:field="*{educations[__${stat.index}__].startDate}"></td>
                 <td><input type="date"class="form-control" th:field="*{educations[__${stat.index}__].endDate}"></td>
                 <td><input class="form-control" th:field="*{educations[__${stat.index}__].summary}"></td>
+                <td><a class="btn btn-danger" th:href="@{/delete(type=education,index=${stat.index})}" th:text="Delete"></a></td>
             </tr>
 
         </table>
-        <a th:href="@{/edit(add=education)}">Add Education</a>
+        <a class="btn btn-primary" th:href="@{/edit(add=education)}">Add Education</a>
+        <br/>
         <br/>
         <h3>Skills</h3>
         <table class="table" style="width: 40%;">
             <tr th:each="skill,stat : *{skills}">
                 <td><input class="form-control" th:field="*{skills[__${stat.index}__]}"></td>
+                <td><a class="btn btn-danger" th:href="@{/delete(type=skill,index=${stat.index})}" th:text="Delete"></a></td>
             </tr>
         </table>
-        <a th:href="@{/edit(add=skill)}">Add Skill</a>
-
+        <a class="btn btn-primary" th:href="@{/edit(add=skill)}">Add Skill</a>
+        <br/>
+        <br/>
         <input type="submit" value="Save">
 
+        <br/>
+        <br/>
+        <br/>
     </form>
 </div>
 </body>

@@ -27,7 +27,10 @@
 		
 		<div id="name">
 			<h1 class="quickFade delayTwo">
-			<span th:text="${userProfile.firstName}">Joe</span><span th:text="${userProfile.lastName}"> Bloggs</span></h1>
+				<span th:text="${userProfile.firstName} ">Joe</span>
+				<span th:text="${userProfile.lastName} "> Bloggs</span>
+				<a href="/edit" th:if="${currentUsersProfile}">Edit</a>
+			</h1>
 			<h2 class="quickFade delayThree" th:text="${userProfile.designation}">Job Title</h2>
 		</div>
 		
