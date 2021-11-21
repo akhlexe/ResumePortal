@@ -39,7 +39,7 @@
         
             <!-- Microformats! -->
         
-            <h1 class="fn"><span th:text="${userProfile.firstName}"></span><span th:text="${userProfile.lastName}">C'thulhu</span><a href="/edit" th:if="${currentUsersProfile}">Edit</a></h1>
+            <h1 class="fn"><span th:text="${userProfile.firstName}"></span><span th:text="${userProfile.lastName}">C'thulhu</span> <a href="/edit" th:if="${currentUsersProfile}">Edit</a></h1>
         
             <p>
                 Cell: <span class="tel" th:text="${userProfile.phone}">555-666-7777</span><br />
@@ -49,10 +49,7 @@
                 
         <div id="objective">
             <p th:text="${userProfile.summary}">
-                I am an outgoing and energetic (ask anybody) young professional, seeking a 
-                career that fits my professional skills, personality, and murderous tendencies. 
-                My squid-like head is a masterful problem solver and inspires fear in who gaze upon it. 
-                I can bring world domination to your organization. 
+                Summary text
             </p>
         </div>
         
@@ -62,22 +59,24 @@
             <dd class="clear"></dd>
             
             <dt>Education</dt>
-            <dd>
-                <h2>Withering Madness University - Planet Vhoorl</h2>
-                <p><strong>Major:</strong> Public Relations<br />
-                   <strong>Minor:</strong> Scale Tending</p>
+            <dd th:each="education : ${userProfile.educations}">
+                <h2><span th:text="${education.college}"></span> </h2>
+                <p>
+                    <strong><span th:text="${education.summary}"></span></strong> Public Relations<br />
+                    <span th:text="${education.formattedStartDate}">Start Date</span> -
+                    <span th:text="${education.formattedEndDate}"></span>
+                </p>
             </dd>
             
             <dd class="clear"></dd>
             
             <dt>Skills</dt>
             <dd>
-                <h2>Office skills</h2>
-                <p>Office and records management, database administration, event organization, customer support, travel coordination</p>
-                
-                <h2>Computer skills</h2>
-                <p>Microsoft productivity software (Word, Excel, etc), Adobe Creative Suite, Windows</p>
+                <ul th:each="skill : ${userProfile.skills}">
+                   <li><span th:text="${skill}"></span></li>
+                </ul>
             </dd>
+
             
             <dd class="clear"></dd>
             

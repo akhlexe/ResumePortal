@@ -20,9 +20,13 @@ public class HomeController {
     @Autowired
     private UserProfileRepository userProfileRepository;
 
+
+    /**
+     * Welcome Page
+      * @return
+     */
     @GetMapping("/")
     public String home() {
-
         return "index";
     }
 
@@ -41,12 +45,14 @@ public class HomeController {
         } else if("skill".equals(add)){
             userProfile.getSkills().add("");
         }
+        userProfileRepository.save(userProfile);
 
         model.addAttribute("userprofile",userProfile);
         model.addAttribute("userId", userId);
 
         return "profile-edit";
     }
+
 
     @PostMapping("/edit")
     public String postEdit(Principal principal, @ModelAttribute UserProfile userProfile){
@@ -103,7 +109,8 @@ public class HomeController {
         model.addAttribute("userProfile",userProfile);
 
 
-        return "profile-templates/"+userProfile.getTheme()+"/index";
+//        return "profile-templates/"+userProfile.getTheme()+"/index";
+        return "profile-templates/2/index";
    }
 }
 
